@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('header'); -%>
+  <body>
+    <h2>Item name:</h2>
+    <div><%= item.item_name %></div>
+    <h2>Item description:</h2>
+    <div><%= item.item_description %></div>
+    <h2>Item category:</h2>
+    <div><%= item.item_category.category_name %></div>
+    <h2>Item price:</h2>
+    <div>$ <%= item.item_price %></div>
+    <h2>In stock:</h2>
+    <div><%= item.stock_number %></div>
+    <br />
+    <div>I work! Should be item details.</div>
+  </body>
+</html>

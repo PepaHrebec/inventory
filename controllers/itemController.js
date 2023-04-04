@@ -12,3 +12,17 @@ exports.items_list = (req, res, next) => {
       next(err);
     });
 };
+
+exports.item_details = (req, res, next) => {
+  Item.findById(req.params.id)
+    .populate("item_category")
+    .then((resolve) => {
+      res.render("item_details", {
+        title: "Item details",
+        item: resolve,
+      });
+    })
+    .catch((err) => {
+      next(err);
+    });
+};
