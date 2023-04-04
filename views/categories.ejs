@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+  <%- include('header'); -%>
+  <body>
+    <ul>
+      <% categories.forEach(category => { %>
+      <li><%= category.category_name %></li>
+      <% }) %>
+    </ul>
+    <div>I work!</div>
+  </body>
+</html>
