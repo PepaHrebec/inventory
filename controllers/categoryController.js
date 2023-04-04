@@ -26,3 +26,16 @@ exports.categories_list = (req, res, next) => {
       next(err);
     });
 };
+
+exports.category_details = (req, res, next) => {
+  Category.findById(req.params.id)
+    .then((resolve) => {
+      res.render("category_details", {
+        title: "Category details",
+        category: resolve,
+      });
+    })
+    .catch((err) => {
+      next(err);
+    });
+};
