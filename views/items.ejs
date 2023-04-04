@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+  <%- include('header'); -%>
+  <body>
+    <ul>
+      <% items.forEach(item => { %>
+      <li><%= item.item_name %></li>
+      <em> --- <%= item.item_description %></em>
+      <br />
+      <% }) %>
+    </ul>
+    <div>I work! Should be listing items.</div>
+  </body>
+</html>
