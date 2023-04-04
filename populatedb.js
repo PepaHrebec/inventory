@@ -1,9 +1,5 @@
 #! /usr/bin/env node
 
-console.log(
-  'This script populates some test books, authors, genres and bookinstances to your database. Specified database as argument - e.g.: node populatedb "mongodb+srv://cooluser:coolpassword@cluster0.lz91hw2.mongodb.net/local_library?retryWrites=true&w=majority"'
-);
-
 // Get arguments passed on command line
 const userArgs = process.argv.slice(2);
 
@@ -24,8 +20,8 @@ async function main() {
   console.log("Debug: About to connect");
   await mongoose.connect(mongoDB);
   console.log("Debug: Should be connected?");
-  await createGenres();
-  await createAuthors();
+  await createCategories();
+  await createItems();
   console.log("Debug: Closing mongoose");
   mongoose.connection.close();
 }
@@ -56,65 +52,76 @@ async function itemCreate(name, description, category, price, number) {
 async function createCategories() {
   console.log("Adding categories");
   await Promise.all([
-    categoryCreate("Patrick", "Rothfuss"),
-    categoryCreate("Ben", "Bova"),
-    categoryCreate("Isaac", "Asimov"),
-    categoryCreate("Bob", "Billings"),
-    categoryCreate("Jim", "Jones"),
+    categoryCreate(
+      "Arabica",
+      "Known for their smooth, complex flavor and distinct lack of bitterness."
+    ),
+    categoryCreate(
+      "Robusta",
+      "Often has a strong smell and a somewhat flat, almost burnt taste. Robusta beans also have significantly more caffeine than Arabica beans."
+    ),
+    categoryCreate(
+      "Liberica",
+      "Unusual, nutty, woody flavor and sneaky backbite on the finish."
+    ),
+    categoryCreate(
+      "Excelsa",
+      "Combine light roast traits like tart notes and fruity flavors with flavors that are more reminiscent of dark roasts."
+    ),
   ]);
 }
 
-async function createBooks() {
-  console.log("Adding Books");
+async function createItems() {
+  console.log("Adding Items");
   await Promise.all([
-    bookCreate(
-      "The Name of the Wind (The Kingkiller Chronicle, #1)",
-      "I have stolen princesses back from sleeping barrow kings. I burned down the town of Trebon. I have spent the night with Felurian and left with both my sanity and my life. I was expelled from the University at a younger age than most people are allowed in. I tread paths by moonlight that others fear to speak of during day. I have talked to Gods, loved women, and written songs that make the minstrels weep.",
-      "9781473211896",
-      authors[0],
-      [genres[0]]
+    itemCreate(
+      "Lyons go-Joe",
+      "Aroma was somewhat overpowering and slightly Marmitey, but the taste made up for it with its smooth, caramel aftertaste. Our favourite blend was Go-Joe and would be a great group-pleaser to take along in a flask to a picnic.",
+      categories[0],
+      5.99,
+      22
     ),
-    bookCreate(
-      "The Wise Man's Fear (The Kingkiller Chronicle, #2)",
-      "Picking up the tale of Kvothe Kingkiller once again, we follow him into exile, into political intrigue, courtship, adventure, love and magic... and further along the path that has turned Kvothe, the mightiest magician of his age, a legend in his own time, into Kote, the unassuming pub landlord.",
-      "9788401352836",
-      authors[0],
-      [genres[0]]
+    itemCreate(
+      "Colombia Eje Cafetero",
+      "Naše bezkofeinová káva tentokrát pochází z produkce několika farmářů z oblasti Eje Cafetero v departementu Quindio v centrální Kolumbii. Jedná se o blend několika místních odrůd s největším zastoupením odrůd Caturra a Castillo.",
+      categories[1],
+      11.99,
+      13
     ),
-    bookCreate(
-      "The Slow Regard of Silent Things (Kingkiller Chronicle)",
-      "Deep below the University, there is a dark place. Few people know of it: a broken web of ancient passageways and abandoned rooms. A young woman lives there, tucked among the sprawling tunnels of the Underthing, snug in the heart of this forgotten place.",
-      "9780756411336",
-      authors[0],
-      [genres[0]]
+    itemCreate(
+      "The Underdog",
+      "Už jenom výběrem zrn zde jdeme záměrně vstříc spíš nižší kyselosti, mohutnějšímu tělu a plné sladkosti s možná silnější hořkostí, než jsi u nás zvyklý. Tohle kafe podle nás nikoho neurazí, navíc skvěle funguje i na automatických kávovarech, takže se parádně hodí třeba do kanceláře.",
+      categories[2],
+      8.99,
+      5
     ),
-    bookCreate(
-      "Apes and Angels",
-      "Humankind headed out to the stars not for conquest, nor exploration, nor even for curiosity. Humans went to the stars in a desperate crusade to save intelligent life wherever they found it. A wave of death is spreading through the Milky Way galaxy, an expanding sphere of lethal gamma ...",
-      "9780765379528",
-      authors[1],
-      [genres[1]]
+    itemCreate(
+      "Rwanda – Horizon Natural",
+      "Red Bourbon je vysoká odrůda kávovníku, která se vyznačuje relativně nízkou produkcí a náchylností na choroby a škůdce, ale vynikající kvalitou a chutí. Bourbon byl z Jemenu přenesen do Brazílie kolem roku 1860 a odtud se rychle rozšířil na sever do dalších částí Jižní a Střední Ameriky, kde se pěstuje dodnes.",
+      categories[1],
+      13.99,
+      12
     ),
-    bookCreate(
-      "Death Wave",
-      "In Ben Bova's previous novel New Earth, Jordan Kell led the first human mission beyond the solar system. They discovered the ruins of an ancient alien civilization. But one alien AI survived, and it revealed to Jordan Kell that an explosion in the black hole at the heart of the Milky Way galaxy has created a wave of deadly radiation, expanding out from the core toward Earth. Unless the human race acts to save itself, all life on Earth will be wiped out...",
-      "9780765379504",
-      authors[1],
-      [genres[1]]
+    itemCreate(
+      "Mother-Ship Blend",
+      "Plné krémové tělo, mléčná čokoláda a květinové aroma. To vše můžete najít v šálku našeho espresso blendu Mother Ship. Bude radost s ním pracovat jak v kavárně, tak u vás doma: je totiž skvělým základem pro vaše mléčné nápoje, ale zároveň nezklame žádného fanouška čistého espressa.",
+      categories[3],
+      2.99,
+      29
     ),
-    bookCreate(
-      "Test Book 1",
-      "Summary of test book 1",
-      "ISBN111111",
-      authors[4],
-      [genres[0], genres[1]]
+    itemCreate(
+      "Etiopie – Kabira Washed",
+      "Tato káva je ideální na přípravu typického etiopského espressa, které je lehké, čajové s vůní květin. Acidita je jemnější, v kávě převládají sladké chutě a hutnější medové tělo.",
+      categories[2],
+      4.99,
+      40
     ),
-    bookCreate(
-      "Test Book 2",
-      "Summary of test book 2",
-      "ISBN222222",
-      authors[4],
-      false
+    itemCreate(
+      "Jenny's Barrel Coffee",
+      "Káva s chutí alkoholu, to je parádní kombinace. A proto jsme se nadšeně vrhli do společného projektu s Kofiem. Baví nás zkoušet a vymýšlet nové věci, a barelová káva pro nás byla velkou neznámou, ale zároveň nás ohromně zajímalo, jak na kávu uloženou v sudech.",
+      categories[1],
+      30.99,
+      3
     ),
   ]);
 }
