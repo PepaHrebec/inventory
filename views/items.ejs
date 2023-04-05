@@ -4,11 +4,12 @@
   <body>
     <ul>
       <% items.forEach(item => { %>
-      <li><%= item.item_name %></li>
+      <li><a href="<%= item.url %>"><%= item.item_name %></a></li>
       <em> --- <%= item.item_description %></em>
       <br />
       <% }) %>
     </ul>
     <div>I work! Should be listing items.</div>
+    <a href="/">Main menu</a>
   </body>
 </html>

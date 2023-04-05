@@ -4,9 +4,10 @@
   <body>
     <ul>
       <% categories.forEach(category => { %>
-      <li><%= category.category_name %></li>
+      <li><a href="<%= category.url %>"><%= category.category_name %></a></li>
       <% }) %>
     </ul>
     <div>I work! Should be listing categories.</div>
+    <a href="/">Main menu</a>
   </body>
 </html>
