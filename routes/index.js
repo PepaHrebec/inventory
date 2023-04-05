@@ -12,6 +12,12 @@ const item_controller = require("../controllers/itemController");
 // index page
 router.get("/", category_controller.index);
 
+// get category create form
+router.get("/category/create", category_controller.category_create_get);
+
+// receive category create form
+router.post("/category/create", category_controller.category_create_post);
+
 // get details of a category
 router.get("/category/:id", category_controller.category_details);
 

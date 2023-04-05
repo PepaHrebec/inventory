@@ -1,4 +1,5 @@
 const Category = require("../models/category");
+const { body, validationResult } = require("express-validator");
 
 exports.index = (req, res) => {
   res.render("index", {
@@ -39,3 +40,22 @@ exports.category_details = (req, res, next) => {
       next(err);
     });
 };
+
+exports.category_create_get = (req, res, next) => {
+  res.render("category_form", {
+    title: "Create category",
+  });
+};
+
+exports.category_create_post = [
+  body("category_name").isLength({ max: 100 }),
+  body("category_description").isLength({ max: 1000 }),
+  (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.render("category_form", {
+        title: "Create category",
+      });
+    }
+  },
+];
