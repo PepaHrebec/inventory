@@ -48,14 +48,29 @@ exports.category_create_get = (req, res, next) => {
 };
 
 exports.category_create_post = [
-  body("category_name").isLength({ max: 100 }),
-  body("category_description").isLength({ max: 1000 }),
-  (req, res) => {
+  body("category_name").trim().escape().isLength({ max: 100 }),
+  body("category_description").trim().escape().isLength({ max: 1000 }),
+  (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.render("category_form", {
+      res.render("category_form", {
         title: "Create category",
       });
+      return;
     }
+    const category = new Category({
+      category_name: req.body.category_name,
+      category_description: req.body.category_description,
+    });
+
+    // save return something when there's an error
+    category
+      .save()
+      .then((categ) => {
+        res.redirect(categ.url);
+      })
+      .catch((err) => {
+        return next(err);
+      });
   },
 ];
