@@ -30,7 +30,16 @@ exports.item_details = (req, res, next) => {
 };
 
 exports.item_create_get = (req, res, next) => {
-  res.render("item_form");
+  Category.find({})
+    .then((resolve) => {
+      res.render("item_form", {
+        title: "Create item",
+        categories: resolve,
+      });
+    })
+    .catch((err) => {
+      return next(err);
+    });
 };
 
 exports.item_create_post = [

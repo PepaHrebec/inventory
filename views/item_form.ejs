@@ -12,7 +12,18 @@
         name="item_description"
         required
       />
-      <input type="radio" name="" id="" />
+      <label for="item_category">Item category:</label>
+      <select name="item_category" id="item_category">
+        <% categories.forEach(category => { %>
+        <option value="<%= category.category_name %>">
+          <%= category.category_name %>
+        </option>
+        <% }) %>
+      </select>
+      <label for="item_number">Item price:</label>
+      <input type="number" name="item_number" id="item_number" required />
+      <label for="stock_number">How many items:</label>
+      <input type="number" name="stock_number" id="stock_number" required />
       <button type="submit">Submit</button>
     </form>
   </body>

@@ -24,6 +24,8 @@ router.get("/category/:id", category_controller.category_details);
 // list of all categories
 router.get("/categories", category_controller.categories_list);
 
+router.get("/item/create", item_controller.item_create_get);
+
 // get details of an item
 router.get("/item/:id", item_controller.item_details);
 
