@@ -26,6 +26,8 @@ router.get("/categories", category_controller.categories_list);
 
 router.get("/item/create", item_controller.item_create_get);
 
+router.post("/item/create", item_controller.item_create_post);
+
 // get details of an item
 router.get("/item/:id", item_controller.item_details);
 

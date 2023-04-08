@@ -13,17 +13,30 @@
         required
       />
       <label for="item_category">Item category:</label>
-      <select name="item_category" id="item_category">
+      <select name="item_category" id="item_category" required>
         <% categories.forEach(category => { %>
-        <option value="<%= category.category_name %>">
+        <option value="<%= category._id %>">
           <%= category.category_name %>
         </option>
         <% }) %>
       </select>
-      <label for="item_number">Item price:</label>
-      <input type="number" name="item_number" id="item_number" required />
+      <label for="item_price">Item price:</label>
+      <input
+        type="number"
+        name="item_price"
+        id="item_price"
+        step="0.01"
+        min="1"
+        required
+      />
       <label for="stock_number">How many items:</label>
-      <input type="number" name="stock_number" id="stock_number" required />
+      <input
+        type="number"
+        name="stock_number"
+        id="stock_number"
+        min="1"
+        required
+      />
       <button type="submit">Submit</button>
     </form>
   </body>
