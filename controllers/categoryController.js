@@ -93,21 +93,25 @@ exports.category_delete_get = (req, res, next) => {
   const itm = Item.find({ item_category: req.params.id }).exec();
   const cat = Category.findById(req.params.id).exec();
 
-  Promise.all([itm, cat]).then((resolve) => {
-    if (resolve[0].length === 0) {
-      res.render("category_delete", {
-        title: "Delete category",
-        to_delete: undefined,
-        cat: resolve[1],
-      });
-    } else {
-      res.render("category_delete", {
-        title: "Delete category",
-        to_delete: resolve[0],
-        cat: resolve[1],
-      });
-    }
-  });
+  Promise.all([itm, cat])
+    .then((resolve) => {
+      if (resolve[0].length === 0) {
+        res.render("category_delete", {
+          title: "Delete category",
+          to_delete: undefined,
+          cat: resolve[1],
+        });
+      } else {
+        res.render("category_delete", {
+          title: "Delete category",
+          to_delete: resolve[0],
+          cat: resolve[1],
+        });
+      }
+    })
+    .catch((err) => {
+      next(err);
+    });
 };
 
 exports.category_delete_post = (req, res, next) => {

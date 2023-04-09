@@ -89,3 +89,26 @@ exports.item_create_post = [
       });
   },
 ];
+
+exports.item_delete_get = (req, res, next) => {
+  Item.findById(req.params.id)
+    .then((resolve) => {
+      res.render("item_delete", {
+        title: "Delete item",
+        deleted_item: resolve,
+      });
+    })
+    .catch((err) => {
+      next(err);
+    });
+};
+
+exports.item_delete_post = (req, res, next) => {
+  Item.findByIdAndDelete(req.params.id)
+    .then((resolve) => {
+      res.redirect("/items");
+    })
+    .catch((err) => {
+      next(err);
+    });
+};
