@@ -1,5 +1,6 @@
 const Category = require("../models/category");
 const { body, validationResult } = require("express-validator");
+const Item = require("../models/item");
 
 exports.index = (req, res) => {
   res.render("index", {
@@ -74,3 +75,19 @@ exports.category_create_post = [
       });
   },
 ];
+
+exports.category_delete_get = (req, res, next) => {
+  Item.find({ item_category: req.params.id }).then((resolve) => {
+    if (resolve.length === 0) {
+      res.render("category_delete", {
+        title: "Delete category",
+        to_delete: undefined,
+      });
+    } else {
+      res.render("category_delete", {
+        title: "Delete category",
+        to_delete: resolve,
+      });
+    }
+  });
+};

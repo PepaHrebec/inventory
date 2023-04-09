@@ -18,6 +18,8 @@ router.get("/category/create", category_controller.category_create_get);
 // receive category create form
 router.post("/category/create", category_controller.category_create_post);
 
+router.get("/category/:id/delete", category_controller.category_delete_get);
+
 // get details of a category
 router.get("/category/:id", category_controller.category_details);
 

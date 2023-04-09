@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('head'); -%>
+  <body>
+    <% if (to_delete === undefined) { %>
+    <div>Can delete this</div>
+    <% } else { %> <% to_delete.forEach(item => { %>
+    <div><%= item.item_name %></div>
+    <% }) %> <% } %>
+  </body>
+</html>
