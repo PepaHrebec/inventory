@@ -77,16 +77,34 @@ exports.category_create_post = [
 ];
 
 exports.category_delete_get = (req, res, next) => {
-  Item.find({ item_category: req.params.id }).then((resolve) => {
-    if (resolve.length === 0) {
+  // Item.find({ item_category: req.params.id }).then((resolve) => {
+  //   if (resolve.length === 0) {
+  //     res.render("category_delete", {
+  //       title: "Delete category",
+  //       to_delete: undefined,
+  //     });
+  //   } else {
+  //     res.render("category_delete", {
+  //       title: "Delete category",
+  //       to_delete: resolve,
+  //     });
+  //   }
+  // });
+  const itm = Item.find({ item_category: req.params.id }).exec();
+  const cat = Category.findById(req.params.id).exec();
+
+  Promise.all([itm, cat]).then((resolve) => {
+    if (resolve[0].length === 0) {
       res.render("category_delete", {
         title: "Delete category",
         to_delete: undefined,
+        cat: resolve[1],
       });
     } else {
       res.render("category_delete", {
         title: "Delete category",
-        to_delete: resolve,
+        to_delete: resolve[0],
+        cat: resolve[1],
       });
     }
   });
