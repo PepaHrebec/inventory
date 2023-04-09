@@ -20,6 +20,8 @@ router.post("/category/create", category_controller.category_create_post);
 
 router.get("/category/:id/delete", category_controller.category_delete_get);
 
+router.post("/category/:id/delete", category_controller.category_delete_post);
+
 // get details of a category
 router.get("/category/:id", category_controller.category_details);
 

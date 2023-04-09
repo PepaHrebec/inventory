@@ -91,3 +91,13 @@ exports.category_delete_get = (req, res, next) => {
     }
   });
 };
+
+exports.category_delete_post = (req, res, next) => {
+  Category.findByIdAndDelete(req.params.id)
+    .then((resolve) => {
+      res.redirect("/categories");
+    })
+    .catch((err) => {
+      next(err);
+    });
+};

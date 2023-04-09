@@ -3,7 +3,9 @@
   <%- include('head'); -%>
   <body>
     <% if (to_delete === undefined) { %>
-    <div>Can delete this</div>
+    <form action="" method="post">
+      <button type="submit">Will delete the category</button>
+    </form>
     <% } else { %> <% to_delete.forEach(item => { %>
     <div><%= item.item_name %></div>
     <% }) %> <% } %>
