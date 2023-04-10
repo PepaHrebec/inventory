@@ -123,3 +123,16 @@ exports.category_delete_post = (req, res, next) => {
       next(err);
     });
 };
+
+exports.category_update_get = (req, res, next) => {
+  Category.findById(req.params.id)
+    .then((resolve) => {
+      res.render("category_form", {
+        title: "Category update",
+        category: resolve,
+      });
+    })
+    .catch((err) => {
+      next(err);
+    });
+};
