@@ -9,14 +9,6 @@ exports.index = (req, res) => {
 };
 
 exports.categories_list = (req, res, next) => {
-  // Category.find().exec(function (err, list_categories) {
-  //   if (err) {
-  //     return next(err);
-  //   }
-  //   res.render("categories", {
-  //     categories: list_categories,
-  //   });
-  // });
   Category.find({})
     .then((resolve) => {
       res.render("categories", {
@@ -77,19 +69,6 @@ exports.category_create_post = [
 ];
 
 exports.category_delete_get = (req, res, next) => {
-  // Item.find({ item_category: req.params.id }).then((resolve) => {
-  //   if (resolve.length === 0) {
-  //     res.render("category_delete", {
-  //       title: "Delete category",
-  //       to_delete: undefined,
-  //     });
-  //   } else {
-  //     res.render("category_delete", {
-  //       title: "Delete category",
-  //       to_delete: resolve,
-  //     });
-  //   }
-  // });
   const itm = Item.find({ item_category: req.params.id }).exec();
   const cat = Category.findById(req.params.id).exec();
 
@@ -136,3 +115,30 @@ exports.category_update_get = (req, res, next) => {
       next(err);
     });
 };
+
+exports.category_update_post = [
+  body("category_name").trim().escape().isLength({ max: 100 }),
+  body("category_description").trim().escape().isLength({ max: 1000 }),
+  (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      res.render("category_form", {
+        title: "Category update",
+        category: req.body,
+      });
+    }
+    const category = new Category({
+      category_name: req.body.category_name,
+      category_description: req.body.category_description,
+      _id: req.params.id,
+    });
+
+    Category.findByIdAndUpdate(req.params.id, category)
+      .then((theCategory) => {
+        res.redirect(theCategory.url);
+      })
+      .catch((err) => {
+        next(err);
+      });
+  },
+];
