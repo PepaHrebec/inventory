@@ -7,6 +7,8 @@
     <h2>Category description:</h2>
     <div><%= category.category_description %></div>
     <br />
-    <div>I work! Should be category details.</div>
+    <a href="<%= category.url %>">All categories</a>
+    <a href="<%= category.url %>/update">Edit</a>
+    <a href="<%= category.url %>/delete">Delete</a>
   </body>
 </html>

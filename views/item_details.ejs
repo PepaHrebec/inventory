@@ -13,6 +13,8 @@
     <h2>In stock:</h2>
     <div><%= item.stock_number %></div>
     <br />
-    <div>I work! Should be item details.</div>
+    <a href="/items">All items</a>
+    <a href="<%= item.url %>/update">Edit</a>
+    <a href="<%= item.url %>/delete">Delete</a>
   </body>
 </html>
