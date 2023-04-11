@@ -37,6 +37,12 @@ router.get("/item/create", item_controller.item_create_get);
 // create an item
 router.post("/item/create", item_controller.item_create_post);
 
+// update item form get
+router.get("/item/:id/update", item_controller.item_update_get);
+
+// update item post
+router.post("/item/:id/update", item_controller.item_update_post);
+
 // get the form to delete an item
 router.get("/item/:id/delete", item_controller.item_delete_get);
 

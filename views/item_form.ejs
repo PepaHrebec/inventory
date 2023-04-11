@@ -4,14 +4,13 @@
   <body>
     <form action="" method="post">
       <label for="item_name">Item name:</label>
-      <input type="text" id="item_name" name="item_name" required />
+      <input type="text" id="item_name" name="item_name" value="<%= item ===
+      undefined ? "" : item.item_name %>" required />
+
       <label for="item_description">Item description:</label>
-      <input
-        type="text"
-        id="item_description"
-        name="item_description"
-        required
-      />
+      <input type="text" id="item_description" name="item_description"
+      value="<%= item === undefined ? "" : item.item_description %>" required />
+
       <label for="item_category">Item category:</label>
       <select name="item_category" id="item_category" required>
         <% categories.forEach(category => { %>
@@ -20,23 +19,14 @@
         </option>
         <% }) %>
       </select>
+
       <label for="item_price">Item price:</label>
-      <input
-        type="number"
-        name="item_price"
-        id="item_price"
-        step="0.01"
-        min="1"
-        required
-      />
+      <input type="number" name="item_price" id="item_price" step="0.01" min="1"
+      value="<%= item === undefined ? "" : item.item_price %>" required />
+
       <label for="stock_number">How many items:</label>
-      <input
-        type="number"
-        name="stock_number"
-        id="stock_number"
-        min="1"
-        required
-      />
+      <input type="number" name="stock_number" id="stock_number" min="1"
+      value="<%= item === undefined ? "" : item.stock_number %>" required />
       <button type="submit">Submit</button>
     </form>
   </body>
